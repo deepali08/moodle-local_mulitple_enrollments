@@ -1,0 +1,86 @@
+<form id="assignform" name="assignform" method="post" action="index.php" onsubmit="return validate()">
+<div>
+<!-- ROLES Drop Down  -->
+<div>
+	<div class="label_div">
+		<?php //echo get_string("roles"); ?> Role to assign
+	</div>
+	<div class="control_div">
+		<select name="userroles" id="userroles" onchange="enrollment_type();">
+			<option value="selectrole">Select Role</option>
+			<?php
+				foreach($roles_course as $sel_roles)
+				{
+					if($sel_roles->id == $roleid)
+					{
+						$selectrole = " selected";
+					}
+					else
+					{
+						$selectrole =" ";
+					}
+
+					echo '<option value="'.$sel_roles->id.'" '.$selectrole.' >'.$sel_roles->name.'</option>';
+				}
+			?>
+		</select>
+	</div>
+</div>
+<!-- Roles Drop Down End Here -->
+
+<!-- Enrollment Option -->
+<div class="separator"></div>
+<div>
+	<div><?php echo get_string('chooseenrollment',"local_multiple_enrollments"); ?> </div>
+	<div style="width:100%; float:left; margin-top:5px;">
+		<div style="float:left; width:20%;border:0px solid #FF0000; ">
+			<div style="float:left; font-weight:normal; padding-right: 10px; border:0px solid #FF0000; ">
+				<?php echo get_string('newenrollment',"local_multiple_enrollments"); ?>
+			</div>
+			<div style="float:left; border:0px solid #FF0000; ">
+				<input type="radio" name="enrollment" id="enrollment" checked="checked" value="newenrollment" onclick="enrollment_type('newenrollment')"  />
+			</div>
+		</div>
+		<div style="float:left; width:20%;border:0px solid #FF0000;" align="left">
+			<div style="float:left;font-weight:normal;padding-right: 10px; border:0px solid #FF0000; ">
+				<?php echo get_string('existingenrollment',"local_multiple_enrollments"); ?>
+			</div>
+			<div style="float:left; width:19%;border:0px solid #FF0000; ">
+				<input type="radio" name="enrollment" id="enrollment"  value="existingenrollment" onclick="enrollment_type('existingenrollment')" />
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Enrollment options display start -->
+<div class="separator"></div>
+<div>
+	<div><?php echo get_string('enroloptions',"local_multiple_enrollments"); ?></div>
+		<div class='label'>
+			<label>Recover user's old grades if possible</label>
+			<input type="checkbox" id="recovergrades" name="recovergrades" value="1">
+		</div>
+		<div class='label'>Enrolment duration: <select name="enrol_duration" id="enrol_duration">
+			<option value="0" selected="selected">Unlimited</option>
+	<?php
+			for($i=1;$i<=365;$i++)	//1 year (No need to check leap year for 366 days)
+			{
+				echo "<option value='{$i}'>{$i} days</option>";
+			}
+	?>
+		</select></div>
+</div>
+<!-- Enrollment options display end -->
+
+<div id='load_image' class="loading">
+	<img src="images/preloader3.gif" /> <b>Information is being processed, please wait ...</b>
+</div>
+
+<!-- Users Drop Down  -->
+<div id="displaytype"></div>
+<!-- Users Drop Down End Here -->
+
+</div>
+<div class="separator"></div>
+</form>
