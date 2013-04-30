@@ -20,10 +20,14 @@
 	float:left;
 	width:20%;
 }
+.dir-rtl .label_div {float:right;}
+
 .control_div {
 	float:left;
 	width:79%;
 }
+.dir-rtl .control_div {float:right;}
+
 .enrol_option_div {
 	clear:both;	
 	padding-top:20px;
